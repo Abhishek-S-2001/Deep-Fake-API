@@ -46,4 +46,4 @@ def predict_on_video(video_file_path, output_file_path, SEQUENCE_LENGTH):
     video_writer.release()
 
 
-predict_on_video('../Resources/Fake3.mp4', 'Result3.mp4', SEQUENCE_LENGTH)
+predict_on_video('../Resources/Fake3.mp4', '../Resources/Result3.mp4', SEQUENCE_LENGTH)
