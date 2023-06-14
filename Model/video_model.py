@@ -15,12 +15,11 @@ def predict_on_video(video_file_path, output_file_path, SEQUENCE_LENGTH):
     frames_queue = deque(maxlen=SEQUENCE_LENGTH)
     predicted_class_name = ''
 
-    json_file = open('video_model.json', 'r')
+    json_file = open('Model/video_model.json', 'r')
     loaded_model_json = json_file.read()
     json_file.close()
     LRCN_model = model_from_json(loaded_model_json)
-
-    LRCN_model.load_weights('video_model.h5')
+    LRCN_model.load_weights('Model/video_model.h5')
     LRCN_model.compile(loss = 'categorical_crossentropy', optimizer = 'Adam', metrics = ["accuracy"])
 
     while video_reader.isOpened():
@@ -46,4 +45,13 @@ def predict_on_video(video_file_path, output_file_path, SEQUENCE_LENGTH):
     video_writer.release()
 
 
-predict_on_video('../Resources/Fake3.mp4', '../Resources/Result3.mp4', SEQUENCE_LENGTH)
+def check_video():
+    if os.path.exists('Model/video_model.h5') == False:
+        url = 'https://drive.google.com/u/5/uc?id=1-07abNo6h7hN-o73elJ6VHmXO1LTlUuc&export=download'
+        filename = 'Model/video_model.h5'
+        urlretrieve(url, filename)
+    if os.path.exists('Model/video_model.json') == False:
+        url = 'https://drive.google.com/u/5/uc?id=1-1VpLV5VESh09Kr9tmnNzetJ4sDVC9bG&export=download'
+        filename = 'Model/video_model.json'
+        urlretrieve(url, filename)
+    predict_on_video('../CheckVideo.mp4', '../Result.mp4', SEQUENCE_LENGTH)
