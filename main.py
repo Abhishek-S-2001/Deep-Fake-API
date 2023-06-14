@@ -1,3 +1,5 @@
+import os
+
 from imports import *
 from Model.video_model import check_video
 from AWSCloud.s3_file import load_video, save_video
@@ -59,7 +61,9 @@ async def read_vcode(file: video_code):
     vcode = file.video_code
     load_video(vcode)
     check_video()
-    save_video(vcode)
+    while(os.path.exists('Result.mp4') == True):
+        save_video(vcode)
+        # os.remove('Result.mp4')
     return 'Video Checked'
 
 

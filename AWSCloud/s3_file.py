@@ -7,7 +7,7 @@ def load_video(video_name):
     s3 = boto3.client("s3", aws_access_key_id=stores3['aws_access_key_id'],
                         aws_secret_access_key=stores3['aws_secret_access_key'])
     try:
-        s3.download_file('deep-fake-bucket', f'Check_Video/{video_name}.mp4', 'CheckVideo.mp4')
+        s3.download_file('deep-fake-bucket', f'Check_Video/{video_name}.mp4', '../CheckVideo.mp4')
         print('File downloaded successfully')
     except botocore.exceptions.ClientError as e:
         if e.response['Error']['Code'] == "404":

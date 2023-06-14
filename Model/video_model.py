@@ -1,3 +1,5 @@
+import os
+
 from imports import *
 
 IMAGE_HEIGHT , IMAGE_WIDTH = 64, 64
@@ -55,3 +57,4 @@ def check_video():
         filename = 'Model/video_model.json'
         urlretrieve(url, filename)
     predict_on_video('../CheckVideo.mp4', '../Result.mp4', SEQUENCE_LENGTH)
+    os.remove('../CheckVideo.mp4')
